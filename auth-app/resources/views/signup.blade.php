@@ -18,6 +18,10 @@
         crossorigin="anonymous">
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
     <style>
     body {
         font-family: 'Nunito', sans-serif;
@@ -41,6 +45,86 @@
     const goBack = () => {
         window.location.href = '/'
     }
+
+        const submitForm = async () => {
+        
+        let name = document.querySelector('#name').value
+        let email = document.querySelector('#email').value
+        let password = document.querySelector('#password').value
+        let password2 = document.querySelector('#password2').value
+        let form = document.querySelector('#signup-form')
+        
+        if(password !== password2) {
+            
+            Toastify({
+                text: 'Passwords are not matching!',
+                className: 'info',
+                position: 'center',
+                gravity: 'top',
+                close: true,
+                style: {
+                    background: 'linear-gradient(to right, #A40606, #D98324)',
+                },
+            }).showToast();
+            
+            form.preventDefault()
+        } else {
+            let request = await fetch('/api/signup', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name,
+                email,
+                password
+            }),
+        })
+
+        let response = await request.json()
+
+        if (response.status === 200) {
+            setTimeout(() => {
+                window.location = '/login'
+            }, 2000); 
+            Toastify({
+                text: `${response.message}`,
+                className: 'info',
+                position: 'center',
+                close: true,
+                gravity: 'top',
+                style: {
+                    background: 'linear-gradient(to right, #5AFF15, #00B712)',
+                },
+            }).showToast();
+        } else {
+            if(response.status === 405) {
+            Toastify({
+                text: `${response.message}`,
+                className: 'info',
+                position: 'center',
+                close: true,
+                gravity: 'top',
+                style: {
+                    background: 'linear-gradient(to right, #A40606, #D98324)',
+                },
+            }).showToast();
+            } else {
+                Toastify({
+                    text: `${response.message}`,
+                    className: 'info',
+                    position: 'center',
+                    close: true,
+                    gravity: 'top',
+                    style: {
+                        background: 'linear-gradient(to right, #5AFF15, #00B712)',
+                    },
+                }).showToast();
+            }
+        }
+        }
+    }
+
     </script>
 </head>
 
@@ -61,18 +145,20 @@
                                     class="fw-bold text-uppercase text-center mb-5">
                                     Create an account</h2>
 
-                                <form>
+                                <form onsubmit="event.preventDefault(); submitForm();" id="signup-form" >
 
                                     <div class="form-outline mb-4">
-                                        <input type="text" id="form3Example1cg"
+                                        <input type="text" id="name"
                                             placeholder="Your Name"
-                                            class="form-control form-control-lg" />
+                                            class="form-control form-control-lg"
+                                            required />
+                                            
                                         <label class="form-label"
                                             for="form3Example1cg"></label>
                                     </div>
 
                                     <div class="form-outline mb-4">
-                                        <input type="email" id="form3Example3cg"
+                                        <input type="email" id="email"
                                             placeholder="Your Email"
                                             class="form-control form-control-lg" />
                                         <label class="form-label"
@@ -81,7 +167,7 @@
 
                                     <div class="form-outline mb-4">
                                         <input type="password"
-                                            id="form3Example4cg"
+                                            id="password"
                                             placeholder="Password"
                                             class="form-control form-control-lg" />
                                         <label class="form-label"
@@ -90,7 +176,7 @@
 
                                     <div class="form-outline mb-4">
                                         <input type="password"
-                                            id="form3Example4cdg"
+                                            id="password2"
                                             placeholder="Repeat your password"
                                             class="form-control form-control-lg" />
                                         <label class="form-label"
@@ -114,7 +200,7 @@
                                     </div>
 
                                     <div class="d-flex justify-content-center">
-                                        <button type="button"
+                                        <button type="submit" 
                                             class="btn btn-outline-light btn-lg px-5">Register</button>
                                     </div>
 

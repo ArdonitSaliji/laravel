@@ -24,7 +24,7 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-        <script src="../js/toast.js"></script>
+        
     <style>
     body {
         font-family: 'Nunito', sans-serif;
@@ -83,8 +83,7 @@
             background: 'linear-gradient(to right, #A40606, #D98324)',
         },
     }).showToast();
-        console.log(response)
-
+        
     }
     </script>
 </head>
