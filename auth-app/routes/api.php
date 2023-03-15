@@ -7,7 +7,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
 $users = [
     [
         'name' => 'test test',
@@ -29,14 +28,12 @@ $users = [
     
 ];
     
-file_put_contents(json_encode($users), 'users2.json');
+// file_put_contents('users2.json', json_encode($users));
+
 // Handle Login
 
-Route::post('/login', function (Request $request) use($users) {
+Route::post('/login', function (Request $request) {
 
-    for($i=0; $i < count($users); $i++) {
-        
-    }
     
 });
 
