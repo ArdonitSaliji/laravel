@@ -29,7 +29,7 @@ $users = [
     
 ];
     
-file_put_contents()
+file_put_contents(json_encode($users), 'users2.json');
 // Handle Login
 
 Route::post('/login', function (Request $request) use($users) {
