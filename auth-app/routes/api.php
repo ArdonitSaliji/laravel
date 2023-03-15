@@ -8,38 +8,41 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-
+$users = [
+    [
+        'name' => 'test test',
+        'email' => 'test@gmail.com',
+        'password' => '12341234'
+    ],
+    
+    [
+        'name' => 'john doe',
+        'email' => 'johndoe@gmail.com',
+        'password' => '12341234'
+    ],
+    
+    [
+        'name' => 'jane doe',
+        'email' => 'janedoe@gmail.com',
+        'password' => '12341234'
+    ]
+    
+];
+    
+file_put_contents()
 // Handle Login
 
-Route::post('/login', function (Request $request) {
+Route::post('/login', function (Request $request) use($users) {
+
+    for($i=0; $i < count($users); $i++) {
+        
+    }
     
 });
 
 
 // Handle Signup
 
-
-// $users = array(
-//     array(
-//         'name' => 'test test',
-//         'email' => 'test@gmail.com',
-//         'password' => '12341234'
-//     ),
-
-//     array(
-//         'name' => 'john doe',
-//         'email' => 'johndoe@gmail.com',
-//         'password' => '12341234'
-//     ),
-
-//     array(
-//         'name' => 'jane doe',
-//         'email' => 'janedoe@gmail.com',
-//         'password' => '12341234'
-//     )
-// );
-
-Route::post('/signup', function(Request $req) {
-    
-
+Route::post('/signup', function()  {
+        
 });
