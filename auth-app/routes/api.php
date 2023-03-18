@@ -9,11 +9,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
     
-// file_put_contents('users2.json', json_encode($users));
-
 // Handle Login
 
 Route::post('/login', function (Request $request) {
+    
     $email = $request->email;
     $password = $request->password;
 
@@ -26,16 +25,17 @@ Route::post('/login', function (Request $request) {
         $getPassword = $users[$i]['password'];
         
         if($getEmail == $email && $getPassword == $password) {
-            return response()->json(['message' => 'success', 'status' => 200], 200);
+            return response()->json(['message' => 'success'], 200);
         }            
     }
 
-    return response()->json(['message' => 'Incorrect Credentials!', 'status' => 403], 403);
+    return response()->json(['message' => 'Incorrect Credentials!'], 403);
+    
 });
 
 
 // Handle Signup
 
-Route::post('/signup', function()  {
-        
+Route::post('/signup', function(Request $request)  {
+    
 });

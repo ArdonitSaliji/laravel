@@ -41,90 +41,83 @@
         opacity: 0.7;
     }
     </style>
+
     <script>
-    const goBack = () => {
-        window.location.href = '/'
-    }
+        const goBack = () => {
+            window.location.href = '/'
+        }
 
         const submitForm = async () => {
         
-        let name = document.querySelector('#name').value
-        let email = document.querySelector('#email').value
-        let password = document.querySelector('#password').value
-        let password2 = document.querySelector('#password2').value
-        let form = document.querySelector('#signup-form')
-        
-        if(password !== password2) {
+            let name = document.querySelector('#name').value
+            let email = document.querySelector('#email').value
+            let password = document.querySelector('#password').value
+            let password2 = document.querySelector('#password2').value
+            let form = document.querySelector('#signup-form')
             
-            Toastify({
-                text: 'Passwords are not matching!',
-                className: 'info',
-                position: 'center',
-                gravity: 'top',
-                close: true,
-                style: {
-                    background: 'linear-gradient(to right, #A40606, #D98324)',
-                },
-            }).showToast();
-            
-            form.preventDefault()
-        } else {
-            let request = await fetch('/api/signup', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                name,
-                email,
-                password
-            }),
-        })
+            if(password !== password2) {
 
-        let response = await request.json()
-
-        if (response.status === 200) {
-            setTimeout(() => {
-                window.location = '/login'
-            }, 2000); 
-            Toastify({
-                text: `${response.message}`,
-                className: 'info',
-                position: 'center',
-                close: true,
-                gravity: 'top',
-                style: {
-                    background: 'linear-gradient(to right, #5AFF15, #00B712)',
-                },
-            }).showToast();
-        } else {
-            if(response.status === 405) {
-            Toastify({
-                text: `${response.message}`,
-                className: 'info',
-                position: 'center',
-                close: true,
-                gravity: 'top',
-                style: {
-                    background: 'linear-gradient(to right, #A40606, #D98324)',
-                },
-            }).showToast();
-            } else {
                 Toastify({
-                    text: `${response.message}`,
+                    text: 'Passwords are not matching!',
                     className: 'info',
                     position: 'center',
-                    close: true,
                     gravity: 'top',
+                    close: true,
                     style: {
-                        background: 'linear-gradient(to right, #5AFF15, #00B712)',
+                        background: 'linear-gradient(to right, #A40606, #D98324)',
                     },
                 }).showToast();
+
+                form.preventDefault()
+
+            } else {
+
+                let request = await fetch('/api/signup', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name,
+                        email,
+                        password
+                    }),
+                })
+
+                let response = await request.json()
+
+                if (request.ok) {
+
+                    setTimeout(() => {
+                        window.location = '/login'
+                    }, 2000); 
+                    Toastify({
+                        text: `${response.message}`,
+                        className: 'info',
+                        position: 'center',
+                        close: true,
+                        gravity: 'top',
+                        style: {
+                            background: 'linear-gradient(to right, #5AFF15, #00B712)',
+                        },
+                    }).showToast();
+
+                } else {
+
+                    Toastify({
+                        text: `${response.message}`,
+                        className: 'info',
+                        position: 'center',
+                        close: true,
+                        gravity: 'top',
+                        style: {
+                            background: 'linear-gradient(to right, #A40606, #D98324)',
+                        },
+                    }).showToast();
+
+                }
             }
         }
-        }
-    }
-
     </script>
 </head>
 
@@ -169,7 +162,10 @@
                                         <input type="password"
                                             id="password"
                                             placeholder="Password"
-                                            class="form-control form-control-lg" />
+                                            class="form-control form-control-lg" 
+                                            required 
+                                            />
+                                            
                                         <label class="form-label"
                                             for="form3Example4cg"></label>
                                     </div>
@@ -178,7 +174,9 @@
                                         <input type="password"
                                             id="password2"
                                             placeholder="Repeat your password"
-                                            class="form-control form-control-lg" />
+                                            class="form-control form-control-lg" 
+                                            required
+                                            />
                                         <label class="form-label"
                                             for="form3Example4cdg"></label>
                                     </div>

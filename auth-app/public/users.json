@@ -4,10 +4,3 @@
     { "name": "jane doe", "email": "janedoe@gmail.com", "password": "12341234" },
     { "name": "hello", "email": "test2@gmail.com", "password": "12341234" }
 ]
-
-[
-    [ "name" => "test test", "email" => "test@gmail.com", "password" => "12341234" ],
-    [ "name" => "john doe", "email" => "johndoe@gmail.com", "password" => "12341234" ],
-    [ "name" => "jane doe", "email" => "janedoe@gmail.com", "password" => "12341234" ],
-    [ "name" => "hello", "email" => "test2@gmail.com", "password" => "12341234" ]
-]
